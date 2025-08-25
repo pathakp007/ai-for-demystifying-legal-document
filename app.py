@@ -1,5 +1,6 @@
 
 import os
+import openai
 import io
 import re
 import time
@@ -19,6 +20,13 @@ import numpy as np
 # --------------
 # Helper functions
 # --------------
+# Streamlit secrets (automatically available on cloud)
+api_key = os.getenv("OPENAI_API_KEY")
+
+if not api_key:
+    st.error("OpenAI API key not found. Please set it in Streamlit Secrets.")
+else:
+    openai.api_key = api_key
 
 def read_pdf(file_bytes: bytes) -> str:
     text = []
