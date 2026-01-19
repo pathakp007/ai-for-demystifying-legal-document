@@ -56,15 +56,15 @@ def get_groq_client():
         st.stop()
     return Groq(api_key=api_key)
 
-def llm_chat(message, model="llama-3.1-8b-instant", temperature=0.2, max_tokens=800):
+def llm_chat(messages, model="llama-3.1-8b-instant", temperature=0.2, max_tokens=800):
     client = get_groq_client()
     resp = client.chat.completions.create(
         model=model,
-        message= message,
+        messages = messages,
         temperature=temperature,
         max_tokens=max_tokens,
     )
-    return resp.choices[0].message.content
+    return resp.choices[0].messages.content
 
 # Since Groq does not provide embeddings yet, we simulate embeddings with a simple hashing trick.
 def embed_texts(texts: List[str]) -> np.ndarray:
