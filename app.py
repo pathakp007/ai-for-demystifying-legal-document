@@ -56,11 +56,11 @@ def get_groq_client():
         st.stop()
     return Groq(api_key=api_key)
 
-def llm_chat(messages, model="llama-3.1-8b-instant", temperature=0.2, max_tokens=800):
+def llm_chat(message, model="llama-3.1-8b-instant", temperature=0.2, max_tokens=800):
     client = get_groq_client()
     resp = client.chat.completions.create(
         model=model,
-        messages=messages,
+        message= message,
         temperature=temperature,
         max_tokens=max_tokens,
     )
